@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0B1220"
+    android:padding="10dp">
+
+    <!-- STATUS (compact) -->
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#141C2F"
+        android:padding="8dp"
+        android:text="Status: Idle"
+        android:textColor="#E7ECF6"
+        android:textStyle="bold"
+        android:textSize="13sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- BPM CARD (compact) -->
+    <LinearLayout
+        android:id="@+id/cardBpm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#141C2F"
+        android:padding="8dp"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="6dp"
+        app:layout_constraintTop_toBottomOf="@id/tvStatus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/cardAi"
+        app:layout_constraintHorizontal_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Heart Rate"
+            android:textColor="#AAB3C8"
+            android:textSize="11sp"/>
+
+        <TextView
+            android:id="@+id/tvBpm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BPM: -"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#4CAF50"
+            android:layout_marginTop="2dp"/>
+
+        <TextView
+            android:id="@+id/tvBpmAvg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Avg (30s): -"
+            android:textColor="#AAB3C8"
+            android:textSize="12sp"
+            android:layout_marginTop="2dp"/>
+    </LinearLayout>
+
+    <!-- AI CARD (compact) -->
+    <LinearLayout
+        android:id="@+id/cardAi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#141C2F"
+        android:padding="8dp"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="6dp"
+        app:layout_constraintTop_toBottomOf="@id/tvStatus"
+        app:layout_constraintStart_toEndOf="@id/cardBpm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AI Verdict"
+            android:textColor="#AAB3C8"
+            android:textSize="11sp"/>
+
+        <TextView
+            android:id="@+id/tvAi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="AI: -"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#E7ECF6"
+            android:layout_marginTop="4dp"
+            android:padding="6dp"
+            android:background="#222B45"/>
+
+        <ProgressBar
+            android:id="@+id/pbConf"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:max="100"
+            android:progress="0"
+            android:indeterminate="false"
+            android:layout_marginTop="6dp"
+            android:progressTint="#CFC7FF"
+            android:progressBackgroundTint="#2A3552"/>
+
+        <TextView
+            android:id="@+id/tvConf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confidence: 0%"
+            android:textColor="#AAB3C8"
+            android:textSize="11sp"
+            android:layout_marginTop="6dp"/>
+    </LinearLayout>
+
+    <!-- BUTTONS (mici) -->
+    <LinearLayout
+        android:id="@+id/rowButtons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/cardBpm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btnConnect"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_weight="1"
+            android:text="Connect"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:layout_marginEnd="6dp"/>
+
+        <Button
+            android:id="@+id/btnToggle"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_weight="1"
+            android:text="Start"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:visibility="gone"
+            android:layout_marginStart="6dp"/>
+    </LinearLayout>
+
+    <!-- ECG CARD (MARE, umple restul ecranului) -->
+    <FrameLayout
+        android:id="@+id/cardEcg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:background="#141C2F"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/rowButtons"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"/>
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
